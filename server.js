@@ -238,7 +238,6 @@ async function handleApi(req, res, url) {
   if (route === '/api/act') {
     const p = game.byToken(body.token);
     if (!p) return json(res, 200, { ok: false, error: 'Sessione scaduta: ricarica la pagina.' });
-    game.pacing = true; // freno anti-raffica sui tasti del turno
     const r = game.act(p.id, body);
     if (!r.soft) broadcast();
     return json(res, 200, r);
